@@ -1,4 +1,11 @@
-import { Image, View, StyleSheet, Keyboard, ScrollView } from 'react-native';
+import {
+  Image,
+  View,
+  StyleSheet,
+  Keyboard,
+  ScrollView,
+  Alert,
+} from 'react-native';
 import Input, { InputTypes, ReturnKeyTypes } from '../components/Input';
 import { useCallback, useReducer, useRef } from 'react';
 import Button from '../components/Button';
@@ -14,6 +21,8 @@ import {
   authFormReducer,
   initAuthForm,
 } from '../reducers/authFormReducer';
+import { getAuthErrorMessage, signIn } from '../api/auth';
+import { useUserState } from '../contexts/UserContext';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
@@ -21,6 +30,8 @@ const SignInScreen = () => {
   const passwordRef = useRef();
 
   const [form, dispatch] = useReducer(authFormReducer, initAuthForm);
+
+  const [, setUser] = useUserState();
 
   useFocusEffect(
     useCallback(() => {
@@ -40,11 +51,17 @@ const SignInScreen = () => {
     });
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     Keyboard.dismiss();
     if (!form.disabled && !form.isLoading) {
       dispatch({ type: AuthFormTypes.TOGGLE_LOADING });
-      console.log(form.email, form.password);
+      try {
+        const user = await signIn(form);
+        setUser(user);
+      } catch (e) {
+        const message = getAuthErrorMessage(e.code);
+        Alert.alert('로그인실패', message);
+      }
       dispatch({ type: AuthFormTypes.TOGGLE_LOADING });
     }
   };
