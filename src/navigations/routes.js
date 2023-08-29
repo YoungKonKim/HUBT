@@ -4,5 +4,14 @@ export const AuthRoutes = {
 };
 
 export const MainRoutes = {
-  PROFILE: 'Profile',
+  CONTENT_TAB: 'ContentTab',
+  UPDATE_PROFILE: 'UpdateProfile',
+  IMAGE_PICKER: 'ImagePicker',
+};
+
+export const ContentRoutes = {
+  HOME: 'home',
+  SERVICE: 'service',
+  MAP: 'map',
+  PROFILE: 'profile',
 };

@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 import { Asset } from 'expo-asset';
 import { initFirebase } from '../api/firebase';
 import { useUserState } from '../contexts/UserContext';
-import MainStack from './MainStack';
 import { onAuthStateChanged } from '../api/auth';
+import MainStack from './MainStack';
 
 const Navigation = () => {
   const [user, setUser] = useUserState();
@@ -16,20 +16,20 @@ const Navigation = () => {
     (async () => {
       try {
         await SplashScreen.preventAutoHideAsync();
+
         await Asset.fromModule(
           require('../../assets/leaf.png')
         ).downloadAsync();
 
         //firebase 초기화및 연결
         const app = initFirebase();
-        // eslint-disable-next-line no-console
-        console.log(app);
 
         //로그인상태를 유지하기 위해
         const unsubscribe = onAuthStateChanged((user) => {
           if (user) {
             setUser(user);
           }
+          setIsReady(true);
           unsubscribe();
         });
       } catch (e) {
