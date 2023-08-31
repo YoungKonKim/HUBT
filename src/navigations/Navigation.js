@@ -21,7 +21,7 @@ const Navigation = () => {
           require('../../assets/leaf.png')
         ).downloadAsync();
 
-        //firebase 초기화및 연결
+        //firebase 연결
         const app = initFirebase();
 
         //로그인상태를 유지하기 위해

@@ -5,6 +5,8 @@ import ContentTap from './ContentTap';
 import UpdateProfileScreen from '../screens/UpdateProfileScreen';
 import ImagePickerScreen from '../screens/ImagePickerScreen';
 import HeaderLeft from '../components/HeaderLeft';
+import PaymentMethodScreen from '../screens/PaymentMethodScreen';
+import MyCarScreen from '../screens/MyCarScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +32,11 @@ const MainStack = () => {
         name={MainRoutes.IMAGE_PICKER}
         component={ImagePickerScreen}
       />
+      <Stack.Screen
+        name={MainRoutes.PAYMENT_METHOD}
+        component={PaymentMethodScreen}
+      />
+      <Stack.Screen name={MainRoutes.MY_CAR} component={MyCarScreen} />
     </Stack.Navigator>
   );
 };

@@ -56,7 +56,24 @@ const ProfileScreen = () => {
 
         <Text style={styles.nickname}>{user.displayName || 'nickname'}</Text>
       </View>
-      <View style={styles.listContainer}></View>
+      <View style={styles.listContainer}>
+        <Text
+          style={styles.text}
+          onPress={() => navigation.navigate(MainRoutes.PAYMENT_METHOD)}
+        >
+          결재수단관리
+        </Text>
+        <Text
+          style={styles.text}
+          onPress={() => navigation.navigate(MainRoutes.MY_CAR)}
+        >
+          차량등록관리
+        </Text>
+        <Text style={styles.text}>이용내역</Text>
+        <Text style={styles.text}>나의리뷰보기</Text>
+        <Text style={styles.text}>쿠폰</Text>
+        <Text style={styles.text}>회원정보변경</Text>
+      </View>
     </View>
   );
 };
@@ -100,6 +117,12 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
+    marginTop: 30,
+  },
+  text: {
+    marginTop: 20,
+    left: 30,
+    fontSize: 18,
   },
 });
 

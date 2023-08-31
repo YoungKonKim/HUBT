@@ -7,6 +7,8 @@ export const MainRoutes = {
   CONTENT_TAB: 'ContentTab',
   UPDATE_PROFILE: 'UpdateProfile',
   IMAGE_PICKER: 'ImagePicker',
+  PAYMENT_METHOD: 'PaymentMethod',
+  MY_CAR: 'MyCar',
 };
 
 export const ContentRoutes = {
