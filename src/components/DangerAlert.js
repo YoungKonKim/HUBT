@@ -6,7 +6,7 @@ import Button, { ButtonTypes } from './Button';
 
 export const AlertTypes = {
   LOGOUT: 'LOGOUT',
-  DELETE_POST: 'DELETE_POST',
+  DELETE_CARINFO: 'DELETE_CARINFO',
 };
 
 const DangerAlertProps = {
@@ -15,7 +15,7 @@ const DangerAlertProps = {
     title: '로그아웃',
     message: '정말 로그아웃 하시겠습니까?',
   },
-  DELETE_POST: {
+  DELETE_CARINFO: {
     iconName: 'delete-variant',
     title: '글 삭제',
     message: '정말 삭제하시겠습니까?',

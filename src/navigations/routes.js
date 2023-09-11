@@ -9,6 +9,8 @@ export const MainRoutes = {
   IMAGE_PICKER: 'ImagePicker',
   PAYMENT_METHOD: 'PaymentMethod',
   MY_CAR: 'MyCar',
+  CAR_REGISTER: 'CarRegister',
+  CAR_REGISTER2: 'CarRegister2',
 };
 
 export const ContentRoutes = {

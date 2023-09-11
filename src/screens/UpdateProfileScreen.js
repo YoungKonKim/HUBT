@@ -46,6 +46,7 @@ const UpdateProfileScreen = () => {
 
   const onSubmit = useCallback(async () => {
     Keyboard.dismiss();
+
     if (!disabled) {
       setIsLoading(true);
       try {
@@ -53,6 +54,8 @@ const UpdateProfileScreen = () => {
           ios: await getLocalUri(photo.id),
           android: photo.uri,
         });
+
+        //Firebase/storage에 사진파일을 업로드한다
         const photoURL = await uploadPhoto({
           uri: localUri,
           uid: user.uid,
@@ -60,6 +63,7 @@ const UpdateProfileScreen = () => {
 
         const userInfo = { displayName, photoURL };
 
+        //Firebase/Auth에 닉네임과 사진주소를 변경한다.
         await updateUserInfo(userInfo);
         setUser((prev) => ({ ...prev, ...userInfo }));
 

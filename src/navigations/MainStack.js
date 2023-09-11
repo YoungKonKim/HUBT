@@ -7,6 +7,8 @@ import ImagePickerScreen from '../screens/ImagePickerScreen';
 import HeaderLeft from '../components/HeaderLeft';
 import PaymentMethodScreen from '../screens/PaymentMethodScreen';
 import MyCarScreen from '../screens/MyCarScreen';
+import CarRegisterScreen2 from '../screens/CarRegisterScreen2';
+import CarRegisterScreen from '../screens/CarRegisterScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +39,14 @@ const MainStack = () => {
         component={PaymentMethodScreen}
       />
       <Stack.Screen name={MainRoutes.MY_CAR} component={MyCarScreen} />
+      <Stack.Screen
+        name={MainRoutes.CAR_REGISTER}
+        component={CarRegisterScreen}
+      />
+      <Stack.Screen
+        name={MainRoutes.CAR_REGISTER2}
+        component={CarRegisterScreen2}
+      />
     </Stack.Navigator>
   );
 };

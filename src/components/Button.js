@@ -52,11 +52,11 @@ const Button = ({
             backgroundColor: (() => {
               switch (true) {
                 case disabled || isLoading:
-                  return PRIMARY.LIGHT;
+                  return Colors.LIGHT;
                 case pressed:
-                  return PRIMARY.DARK;
+                  return Colors.DARK;
                 default:
-                  return PRIMARY.DEFAULT;
+                  return Colors.DEFAULT;
               }
             })(),
           },

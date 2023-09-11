@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 
+//키보드가 Input컴포넌트를 가리지 않게 만듬.
 const SafeInputView = ({ children }) => {
   return (
     <KeyboardAvoidingView

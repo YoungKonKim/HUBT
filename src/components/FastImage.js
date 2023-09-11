@@ -17,6 +17,7 @@ const FastImage = ({ source, ...props }) => {
         const fileSystemUri = `${FileSystem.cacheDirectory}${hashed}`;
 
         const metadata = await FileSystem.getInfoAsync(fileSystemUri);
+
         if (!metadata.exists) {
           await FileSystem.downloadAsync(source.uri, fileSystemUri);
         }

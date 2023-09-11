@@ -72,7 +72,12 @@ const ProfileScreen = () => {
         <Text style={styles.text}>이용내역</Text>
         <Text style={styles.text}>나의리뷰보기</Text>
         <Text style={styles.text}>쿠폰</Text>
-        <Text style={styles.text}>회원정보변경</Text>
+        <Text
+          style={styles.text}
+          onPress={() => navigation.navigate(MainRoutes.CAR_REGISTER2)}
+        >
+          회원정보변경
+        </Text>
       </View>
     </View>
   );
