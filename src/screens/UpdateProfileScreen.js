@@ -31,11 +31,15 @@ const UpdateProfileScreen = () => {
   const [disabled, setDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
+  //사진변경유무를 체크함.
+  const [isPhotoPcik, setIsPhotoPick] = useState(false);
+
   useEffect(() => {
     if (params) {
       const { selectedPhotos } = params;
       if (selectedPhotos?.length) {
         setPhoto(selectedPhotos[0]);
+        setIsPhotoPick(true);
       }
     }
   }, [params]);
@@ -49,23 +53,34 @@ const UpdateProfileScreen = () => {
 
     if (!disabled) {
       setIsLoading(true);
+
       try {
-        const localUri = Platform.select({
-          ios: await getLocalUri(photo.id),
-          android: photo.uri,
-        });
+        if (isPhotoPcik) {
+          const localUri = Platform.select({
+            ios: await getLocalUri(photo.id),
+            android: photo.uri,
+          });
 
-        //Firebase/storage에 사진파일을 업로드한다
-        const photoURL = await uploadPhoto({
-          uri: localUri,
-          uid: user.uid,
-        });
+          //Firebase/storage에 사진파일을 업로드한다
+          const photoURL = await uploadPhoto({
+            uri: localUri,
+            uid: user.uid,
+          });
 
-        const userInfo = { displayName, photoURL };
+          const userInfo = { displayName, photoURL };
 
-        //Firebase/Auth에 닉네임과 사진주소를 변경한다.
-        await updateUserInfo(userInfo);
-        setUser((prev) => ({ ...prev, ...userInfo }));
+          //Firebase/Auth에 닉네임과 사진주소를 변경한다.
+          await updateUserInfo(userInfo);
+
+          setUser((prev) => ({ ...prev, ...userInfo }));
+        } else {
+          //닉네임만 변경한경우
+          const userInfo = { displayName };
+
+          await updateUserInfo(userInfo);
+
+          setUser((prev) => ({ ...prev, ...userInfo }));
+        }
 
         navigation.goBack();
       } catch (e) {
@@ -81,6 +96,7 @@ const UpdateProfileScreen = () => {
     photo.id,
     photo.uri,
     user.uid,
+    isPhotoPcik,
   ]);
 
   useLayoutEffect(() => {

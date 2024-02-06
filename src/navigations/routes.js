@@ -7,7 +7,7 @@ export const MainRoutes = {
   CONTENT_TAB: 'ContentTab',
   UPDATE_PROFILE: 'UpdateProfile',
   IMAGE_PICKER: 'ImagePicker',
-  PAYMENT_METHOD: 'PaymentMethod',
+  PAYMENT: 'Payment',
   MY_CAR: 'MyCar',
   CAR_REGISTER: 'CarRegister',
   CAR_REGISTER2: 'CarRegister2',

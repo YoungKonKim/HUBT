@@ -23,8 +23,26 @@ import {
 } from '../reducers/authFormReducer';
 import { getAuthErrorMessage, signIn } from '../api/auth';
 import { useUserState } from '../contexts/UserContext';
+// import { GoogleSignin } from '@react-native-google-signin/google-signin';
+
+// GoogleSignin.configure({
+//   webClientId: 'YOUR_WEB_CLIENT_ID',
+//   offlineAccess: true,
+// });
 
 const SignInScreen = () => {
+  // const signInWithGoogle = async () => {
+  //   try {
+  //     await GoogleSignin.hasPlayServices();
+  //     const userInfo = await GoogleSignin.signIn();
+  //     console.log(userInfo);
+  //     // 성공적으로 로그인되면 userInfo에 사용자 정보가 있습니다.
+  //     // 이 정보를 앱의 상태나 백엔드 서버에 저장할 수 있습니다.
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   const navigation = useNavigation();
   const { top, bottom } = useSafeAreaInsets();
   const passwordRef = useRef();
@@ -35,9 +53,7 @@ const SignInScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-      return () => {
-        dispatch({ type: AuthFormTypes.RESET });
-      };
+      return () => dispatch({ type: AuthFormTypes.RESET });
     }, [])
   );
 
@@ -60,11 +76,24 @@ const SignInScreen = () => {
         setUser(user);
       } catch (e) {
         const message = getAuthErrorMessage(e.code);
-        Alert.alert('로그인실패', message);
+        Alert.alert('로그인실패', message, message, [
+          {
+            text: '확인',
+            onPress: () => dispatch({ type: AuthFormTypes.TOGGLE_LOADING }),
+          },
+        ]);
       }
-      dispatch({ type: AuthFormTypes.TOGGLE_LOADING });
     }
   };
+
+  // const signOutWithGoogle = async () => {
+  //   try {
+  //     await GoogleSignin.revokeAccess();
+  //     await GoogleSignin.signOut();
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <SafeInputView>
@@ -106,6 +135,8 @@ const SignInScreen = () => {
             isLoading={form.isLoading}
             styles={{ container: { marginTop: 20 } }}
           />
+
+          {/* <Button title="Google로 로그인" onPress={signInWithGoogle} /> */}
 
           <HR text="ok" styles={{ container: { marginVertical: 30 } }} />
 

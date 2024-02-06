@@ -8,6 +8,8 @@ import { useUserState } from '../contexts/UserContext';
 import { onAuthStateChanged } from '../api/auth';
 import MainStack from './MainStack';
 
+const ImageAssets = [require('../../assets/leaf.png')];
+
 const Navigation = () => {
   const [user, setUser] = useUserState();
   const [isReady, setIsReady] = useState(false);
@@ -17,12 +19,17 @@ const Navigation = () => {
       try {
         await SplashScreen.preventAutoHideAsync();
 
+        //캐싱하는파일을 한번에 관리하기위함 비동기함수를 동시에실행-Promise.all
+        await Promise.all(
+          ImageAssets.map((image) => Asset.fromModule(image).downloadAsync())
+        );
+
         await Asset.fromModule(
           require('../../assets/leaf.png')
         ).downloadAsync();
 
         //firebase 연결
-        const app = initFirebase();
+        initFirebase();
 
         //로그인상태를 유지하기 위해
         const unsubscribe = onAuthStateChanged((user) => {
@@ -32,6 +39,7 @@ const Navigation = () => {
           setIsReady(true);
           unsubscribe();
         });
+        
       } catch (e) {
         // eslint-disable-next-line no-console
         console.log(e);
